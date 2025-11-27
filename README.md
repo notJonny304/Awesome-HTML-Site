@@ -834,6 +834,51 @@ img {vertical-align: middle;}
         0 0 102px #0f0,
         0 0 151px #0f0;
 }
+.glitch-text {
+  position: relative;
+  font-family: 'monospace', sans-serif; /* Use a monospace or futuristic font */
+  color: #fff;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text); /* Use data-text attribute for content */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff00c1; /* Red glitch */
+  animation: glitch-anim-1 2s infinite alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: 2px 0 #00ffff; /* Cyan glitch */
+  animation: glitch-anim-2 2s infinite alternate-reverse;
+}
+
+@keyframes glitch-anim-1 {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+@keyframes glitch-anim-2 {
+  0% { transform: translate(0); }
+  20% { transform: translate(2px, -2px); }
+  40% { transform: translate(2px, 2px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(-2px, 2px); }
+  100% { transform: translate(0); }
+}
 </style>
 </head>
 <body>
@@ -941,7 +986,7 @@ HIII
 <div class="matrix-container">
     <div class="matrix-text" data-text="How to Join">How to Join</div><div class="rain"></div>
 </div><h1 class="neon-green-text" style="text-align:center;font-size:27px;font-weight:normal;font-family:Courier New;position: relative; top: -90px;">To Join, Contact the Founders or Fill out this Google Form!</h1>
-    
+    <h1 class="glitch-text" data-text="Want Cool CSS Effects Like These?">Want Cool CSS Effects Like These?</div>
   </div>
 </div>
 
