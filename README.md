@@ -4,7 +4,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 :root {
@@ -879,22 +881,92 @@ img {vertical-align: middle;}
   80% { transform: translate(-2px, 2px); }
   100% { transform: translate(0); }
 }
+.awesome-buzz-effect {
+    position: relative;
+    font-family: monospace; /* Glitch effects often work well with techy/mono fonts */
+    font-size: 4rem;
+    color: white;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #FF00FF, 0 0 20px #FF00FF; /* Optional neon glow */
+    animation: buzz-animation 1s infinite alternate; /* Main buzz/shake */
+}
+
+/* Create distorted layers with pseudo-elements */
+.awesome-buzz-effect::before,
+.awesome-buzz-effect::after {
+    content: attr(class="awesome-buzz-effect"); /* Use the text content */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    overflow: hidden;
+}
+
+.awesome-buzz-effect::before {
+    left: 2px;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #00FFFF, 0 0 20px #00FFFF;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%); /* Clip to top third */
+    animation: buzz-top 1s infinite alternate-reverse;
+}
+
+.awesome-buzz-effect::after {
+    left: -2px;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #FF00FF, 0 0 20px #FF00FF;
+    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%); /* Clip to bottom third */
+    animation: buzz-bottom 1.5s infinite alternate-reverse;
+}
+
+/* Main shake animation */
+@keyframes buzz-animation {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10% {
+        transform: translateX(-1px);
+    }
+    90% {
+        transform: translateX(1px);
+    }
+}
+
+/* Top layer distortion */
+@keyframes buzz-top {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(5px, -5px);
+    }
+}
+
+/* Bottom layer distortion */
+@keyframes buzz-bottom {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(-5px, 5px);
+    }
+}
+
 </style>
 </head>
 <body>
 
 
-<div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'Homepage')" id=defaultOpen>Homepage</button>
+<div class="tab" style="height:50px">
+  <button class="tablinks" onclick="openCity(event, 'Homepage')" id=defaultOpen >
+<i class="material-icons" style="font-size:17px;">home</i><span style="margin-left:4px;position:relative;top:-3px">Homepage</span></button>
   
-  <button class="tablinks" onclick="openCity(event, 'myJourney')" > My Journey</button>
-  <button class="tablinks" onclick="openCity(event, 'Paris')">My Awesome Project Pool</button>
-  <button class="tablinks" onclick="openCity(event,'Info')">Info</button>
+  <button class="tablinks" onclick="openCity(event, 'myJourney')" style="position:relative;top:-3px" ><span><i class="glyphicon glyphicon-plane" style="margin-left:-3px;position:relative;top:3px"></i></span><span style="margin-left:5px">My Journey</span></button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')" style="position:relative;top:-3px" >My Awesome Project Pool</button>
+  <button class="tablinks" onclick="openCity(event,'Info')" style="position:relative;top:-3px">Info</button>
     
 </div>
   
 <div id="Homepage" class="tabcontent" style="background-image: url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQA7AMBIgACEQEDEQH/xAAbAAACAwEBAQAAAAAAAAAAAAADBAACBQEGB//EAD4QAAEDAwIDBAgFAgUEAwAAAAECAxEABCESMSJBUQUTYXEUIzKBkaHB8EJSsdHhYvEVM0NygiSiwvI0kuL/xAAZAQADAQEBAAAAAAAAAAAAAAABAgMABAX/xAAnEQACAgMAAQMEAgMAAAAAAAAAAQIRAxIhMQQiQRNRocGx4WFxgf/aAAwDAQACEQMRAD8A+KtJClgEwOtEebShaghYWAcKA3oaauMmmrpJ+TraCo4BptdophCC6lQChIkRNAZcKDjFOXV65dIbS6sqDadKJ5DpQd2Sm5WvsAZY75zSgEknAHOo4ytlwocBBHUbUSyfctXQ40pSVgyCOtdurhdxcKccJUpRkqO5NMr2Fblt/gClI6E+6rAAiQnH+2ugACTt5VdhClJ0hKTPhTmbOKLXcxpPeSIMVHNGk6EkVbuFKySBV0WhUpKQrcxtWBaFw2s7IUfIV0Nq20Knyp5hpwaQFJzpjHU1QhzvWwVCViZj+o0QbCiW1K9lJPkKndqzwnGTjanGm1pW8lCkgpOZE7Ghk6XXJIkyn5/xWBswaGHFfgX8DRFWNwmZackctJrSsXG1rKV853TW1208hpCVMuNrUpPFw/D4VKWTWSRzT9TKM1GvJ41bLiRKm1gbZSaH7vlT9xdOEBBAiccP31oDbCnEapiTiqp2dUZOulYB2TP/ABrunoif+NWIIYnGCOXhRCyoAr4cAcvOgwWLqSCk8P8A20AoP5T8KbDajMBOIG3jVS0omJGI5VgqQsUFJGoEeYrpKelXeBBSkkZJ5RVS140ClgsRtVCJ2BopbjnXEgpOCKAyYEjNVIo5CpnFDVIoDJgTVYohFVNAdMOGzA4TXdMcjW+eynW+zmblRRodMJzn4VjugoI2pIZFLwc0Myn4Ae6rhJgEjFV1bzzoiXSE6cRFVHZ0RIx8q5B1GAfhVkuKUYgD+aOhCyVGQBk0yFboEhCycJUfdWr2ZYC6ASlKisk4AnEfvVuz2XnW0lCmwJjM+FafYbjtu2l5lSEnUUyZmYmo5ZNL2nHnyyUXqZXaFtbNKASlQIImR4GfnFLMLtEmHgf/AK/z51q37a7gqcKmc5iD0msk2iypUKEBSQRHUH9qbG249Gwtyh7mdQGVuS2hcSJhPKf2oymrfQ3DLoUBxHuz4fWfiKqyjR3aCQFqAIBSZO9OIZdDK1akhKUgkKSrNP4GboQLaC696tYBPBKfGrNoa70KW0spmTwHI1D6TTgZIMr0iTj1as8X1oTq3bdCSe7ziM4zP0rWDa+DPfMNKhplxIg57sjp9ar2heIcCdKFJQFHdBAjH80qvtF1RgpTEEZ5TFUcuHLlttkpSAVYPj9mhrXWTWL3W0Rblqpc6DHl4edDPckcCTPLG2BTF12Y5bOaC4lRgxAOcA/Wu21i6pfCsJ8c/lB+tNyrKJpK0yOItPRVaEKDkyCU0f0JnS3qYdE6JBbO3P602eznWUDvXQpJjAJ5yPoa1HX3EpAOhQ0ge6CPrUJZKOSfqKdLp5ZNmiW4bXqhMjQcmTQn7dLZy2tOOafGvUpd1OBxSm0rMcj1J+prM7QClqWsmSc+yrmaMcjbofH6hylTPOOpgiAT7qpB5J+VOXCSNQAGOgIoE6RgyfLNWO9PgEyNwfhXe7JmdxVtSlqA2M4mm2WlKdIBExvSydBlKkKejrjY/ChqaIxXtezOzO/aWC8ygji45zwgj6V569ZLbhAKcRn3VCOZSlSIY/UqUnFfBhlJJ2qpBB2NaVs02u4SHlBKT7RjaqXjSEXCwwsKbB4SRvVNu0dSydoMbslDaJOnGJpZZQpaZriErcKMVFJUkokZrRio+BYxS8EhudvlVghKthPurqQqTt9zRGlrbUSAmfHzqhmR1iGQsIIkxkGuNJUTud84p68vXnLRDLiEhCVbifH+aonvWlL1aAZVMzv9igm/kncqHbG2KoAUoAnkkwKds27VIAeKzxnbVtHh7/vNDsO1X2k92jukxni1eH7Ve1vHrVIQlTRE/imT8KlJOzimptsz31W+uE641CBKs8J/j+1cWm1KkhoOAYmSrPT5T9Kq9duNvoWUIJBCoyMgR9aZ7NeuLhxCW2mvV6EcRVmAen+39qrVI6FyNlWW7VRQtYXhtucL3zOY8vpTCfQA0dfe6lI4J7yJ1qj5aPnzp2ybvko0IRbAJSjBUvYFX8/So/a36gyhabcFsDAUr8Ok/oE7ePOkvpB5I3Tf5MlS7dN1bqUpfo+s6/aHDq+O3Sq33oi3EeikqydR4o3G08t6bvrG7Qu3Yc7oErUhOkmJmMz9++qr7LulIKlKb0oSpUZGBnp0prQ6nHzZQ/4XqXpVqBK9IKV9eH3x/NVcaYWSUICc7BKqbb7FvUpWEqZPEoEEnkY6c6KbW4bdUzob1GYOtUTI8PEVm0I5xv2v8ia0srhxXw0rM461xn0ecHhKzCgF/lGPvrRT36bzuilBhsq0azG2/nVre2urZrWkNKCVqwVKxKE/RQrN8CnzoxdP2SLT1OtLmInXBHLfw+e1Ht3rJTLYdCyvg1QlcR+Ll51n9pel3Fmp9xLQQkIEJJk6hqG/+/8AaiMXl4xbttpS0pK0NjJUDCgR+/lU3C0SeJNBlP8AZ6W28L1QnVIVk8/n05bVm+kW/eud73hRq4PawnP8Ud969uUpuXAzxhLgAKtiY+/lSTq7i4gENjVGc9RTxjSKwxJALk2ikqLYVMH833v8qWQlpbaICtUSrenHGX22HNWgpKCTk9Vfz8qVtbpTAgJSeWT76c6kqjws0wzqVqBgeB8KK02kOE5EJ8d6bsnC4VICUQtKk5nAMftTN2wu0eUoBGpQkpyRnNSlPtEJZfdqxd27ZbSQ3qTMiZV0/tWa860syqfielS5fUomdPTn0ik1vqxgYrKCXS2PEl0EtRC8E0NZCjJJqylSZNVJmno60jZ7NuLVlC+9Z70lvSk6o0q60i9xrB5UFoqUoeFNSpTiAobTSKCTbIaqMmziEpJGT45PWm7dhhbkFagmCTufxD6VxT06RoTgR8x+1aHZt+WHVFLCF6xG+2ZrSk64SyTko8QteWzAcSG1ko1nkdsdffVblpnRKFSozJJMbV6e7Sl+xQ8pDQ0qkJmTzP1PnWf2op9Nv3KmmwEKOypOMZ+dJjy7HJj9TvwwVulsbEHwUaOt9JSFCVEq9kLVPjVO0ErMrWgJ4oMK+NNMekMvBQbbMaRGrqkQa6WkdTa1svbM2bpSp9fEciCoxjAovZbNsHnC464lIdToIJEphe8f8fiaZslPrcbPcNSpxKcOcyhX7/Kmey0KIccSxq1OpcxiCNWP+6pSlRy5Muqdgkos8xcvg8EcS8ZM8vL6URluxLTf/UvFwJH41xP/ALT7qOm5cY4BbTASOedJ/mu2l73Q7vuBgadzPtKP/kR7qRPhzPI9WZvaDSS4k2zrqkpUsgqKiRxGDnrg0o4bkzK3TvJk++vXt27l2kqDQBcJG+OJWr60K4buEJf0stEEOH/M5GSfPE/CjHInxCQ9Wm9TyPf3Ikd47mQRqPPemLNet9z0t10QgnJUDOPpNPBt5XaV6pLKNYC9YUrAM8utcc7Qdt+1H31st69ITpkwMg+/b4GKpZ1734Qke6/xBwhxXd92YVxT7P70zFmWiFPuateOJcf5aflOr4DlVD2ov01Vz3KQS3o0aj0ia0ez3AbV65hoaSDoK8mE6aWTpAlNwSbRj9oC29G027zixKMFSs7+6Y01dlNkW2g88vUW0xK1gaoMe6Y2od12gXLdy37lI1aJIP5UgfQfOtJ5q9dbZ9QzkNoBDnXHTHtCiUcmkk/0IrT2aW1JbuHCeHQFKVtr6eUn9KR9QEe2qRGNSuppnU++6xcBtsAQQAYnUY930obtw406ha2kccEcXRc0UqKqxW5U33bmlxc6TAKj+Yf/AKodmm2k+kE7Ygmm33S6lcttiUFGF/1BX0/WhISsW7cISZBgz0NMil8oZYdtG1KIkHSYyd65eXLDmvSowCoAyduVJOrdI7vSMEjf760JbqzMpGZ59RNI4K7FWJXZR8Nzv8z0pd1LY9mTTMOOn2Rv16/3pg9nq7vjAHjNFui26j5MopRHvqhCetNPoUhWkDHn99KWUhSjyrJl4u0Wa0jcmjhaZBBMTuaEnUAMdOdWOpKmyUgRgDrWEasYKmuCF7nNaNou2CuJ1QGncKjn5dKylEk5AHvojStOrSIURE6q2vCU8dqj0huLFSCDcqkJ/NOem3l50jePtOFRFwtWCqFK3NZSkrSDtAk48IqBBcSTpGATM8qEcaXSMfTxj2y76woQHFK4pgmeVOWBt1vI9Ku3Et7H1kfhA3z4/Cs9bC20kqiAYnxia0l3LhASbcTj/U6J09Ko1ZSa9tIdtXLZKm4vV6Q6n/UiBBz+nxitXs64s2kpBudIIRqGvmUnV8CBWXY3Fwh1tYYBIIGkOxukjpj2q0mry6aKJs2wVpTpCXo2gdOUe6TvUZR6cGbHsqf8oIVdnrUom7M8MesjmZ5eVRA7NAQr0iVEAnjxOPDxPwmgi8um9E2iPWd2Uw94nw8fd41awuLott6LVBEJgl6J9Yrw6z8JrUQ+k6/tGwL61a7tti4ltSzrIVkCd/CkH7hpy6fQu6cDUe1r3kiR48/hSd27cPt2jfcpSVyEQ5JJJ8sUH/D7tZhIQTkjj9ry92aVRSJY/Txj2wgVbKvrr/qlpSW8K15WTEgmM5qPMdnKSpartSnCSSSufwmOXUAe+iWVpeWhcUWm1BbZT/mR/cHpzo7Tr5WvTap3Xu74I8PLz1GmZZNJ+1/kVNr2RI/6o6gcesHTy+9qDdOWqF92xdqKCQCdQ20q8OoT8aam4cWUi3T7azl7+hI6eXnTJevEp/8Ahowoie/ycJHTlge+PGt/sydNX3/qMLtMWvcabe5LhBEJKges8vLyJo7D1qq3QV9oOpcSlBA76AFAY5Yz8Kr2rcvPsLDlulCQW5hcxIKhiNoV7oAo7bt04hpwWyUpS0OLvoIGk8QxiAZ8KL6dPdVf8oy3FWyF6WbpwoCgE8UQJ3/WhENKcY9cpQ/ESfZzTl25cOPgqtkIIcSdIXgcRxt1EeFBZdd9JtT3SdX4Rq3z8qf4LK6v9mkjs/sxVupTb5Luk6UhYgnly60hcW6G7dsF46tKpTq2M/WtR68eFspJYSgBsjV3k8wen9B+JNYF09rknapRUmyGNTcukuUWyW9TbxK9Sh7U4z/Hx8KQhMSHDOefKKOHCEEKggAwJiKEjBIAzH5tsVVKjujxDNuyg/6igqDz56f7UzfI7tuW3SoYiTRLB4Nq7xXIxGvNOdrOIFmhBbQFD8QMzNcuSb38HLPJL6iVHmbjTMlfITSpCJ3NP3SiqDoEQAM7/c0gZnauiPg74eCNnigk1p35s/Rbf0dSy9B7yTieUVl5JGIxRGwSQAn5+NFqxpRtp/YkqmrtrWFAya6DpVlPzq4OrASOZ3FMhWy6laidSzG0FQqpUpskJXAPLeiNqUgq4Sd9oqyp7sjus8WTE/eKIgAuKWCFrO85+FXDzntd4fOmnWXPQNRYAHee3Ip9aHUPAm0AOQMp6EkfI0NkLKaXwZ7VxcpbCkvrGkjAVnG1GZevndK03DsogA6ojpTDThDAb9FTqUsRhPT9cUTs1DqrZ7u7XUFOA6pSIynr0ED/AJ1rJOS6wSV3ylJ1XKhpAAKl7QZArjF3cNPBtdy8kJUEnSuIgz+pn31pMqdt0obcsgSQ2JlOSCRFZms3L9u223CkSgjAniUrfwB+VL5Jxe12jQWoFxk+lq4FHQe9BKeLl40dLxBn01wb7PCgXDi7YpQttxOpRTBKDnVnlV1rKUrJZc0o1bqSYCVQfPJFAg434DuPq0Lm9dkoUQO+kHbFGbTbmSrtN0ElQPrOsTy8BSoaVdMIdLDikmSjKRjHSpcdnuNO6SyUAnSBIyenzFBknSVWHfUyjjb7Sc1yf9TqnP6JoOtK0HV2m7r1bd5/QPrPwoVx2Xc6u7QwEqM5Dg5AGPmKUV2fcNtFxSYbSQCdW2x/8h8aySHgoV5Ge0mbf0NWi+U4vh9WVztgY8o8qAhyFMJ9OdShQbBhfsg7/CnUn0y3NszbDvVaOIx+FIBz5j50o/2JdcJSgK16R7Q3Vy38vjRVD45RXtkwTncm2Ss3qi4Qg6e85yP0k/CkkqhTR74zIAVr2zVhYuOqbSlBJdAIMgSDOfDY1FnuVpa0qSsHTkp3nPKmOpL4CPP6m3fXrgJMAuTPEMfNVLNJt3Gipx2CUkxPOaDdKSSAkZEzkH9KEh0AJBQCB86Oo8YcCnuiNPfECT060ElKXjpcMRNFJ7wFaWxpg4x4ftQFKPeq4RtRoqkMBxM6+8hwT+k/rVr58KAh1S9tzS2ohR4R9ihOKITtnFI4dBpbR1bkgSo8qAd/aNWJkDh+dUJHSiWRUEzvREuKBwqohIJTjejpQYHBnH60LM2ijaiqZM/CiJJB4Z+VRUJx3Y8dqqFDUrA8qZCPpbvVg+1vXUuukzrME/rXEKSFE6RB5SKKXm/yT446CiAfZduXGO5ccV3WqQPHrWg8+6FJK7lSlAk4QnciP0JrM/xBo2aWUshKwqe8gTFaDF6204kuWmseGn8oH0+fWpNO7OScJXYS1C1+y+sKSdaeEbgQD8zVbcuMIcS3dd0O9QIlOxBk58Up+4o9j2g0yO7XZalKOCAn8v3/AHpBpwqW676PLYeB0kpEbynP+5PyrK2yUYzb6ONKLndqd7QOrSgjKMGSfjIpeyZZNy84bzuy24NK5AkE5NVZuGWGgp201erRnh8c/fvoFvd27Tzi128oW4FhIAwJ2zTJMpGLp0HvHVuLt1O3PeFSlEklPCde/wBc07dJQLd5Sb7WshyUynMrE/Hesl64ZWWi21pLZMyBnikfLGadX2jZHSpNmICyY0jI1AgfDFanRnF/CLWV6+ltDYcOgAgDHPetu3fTcIl93IOoKIAyaRtbtt1SnW+zytCm1ZGjMET+nLOcU4ntRkgRYAiTng5R9CB+malNX4ODPByfEEvVlt3gvZMq/En8o/t7qAUtvskO3oIKttSc8Cf2j/j1oF3cJUrUbIiNWeHmj+CfjXGrhvulE2JMK9rgxKE/XPTi61kqQYYnqjRatmrdwG2uBIROoEH7xB99ZV9f3SCAh88JBTIGCDg0zfXBFprTaFtPDxnT49PMD3Zqi7hC0NuehH2UgHg3IIHzIOffSxTuxcUJbbPp59y7uGykocjQAE4GAJI/U/Gua1up1uukqPORvTF28044Ci20zpiIwZUf0I36UutMSTbmDtt1NdKPUVC60BZTqXHUyOooNw02hSglcxPMU2pScRb9eQ6g/T50u+tJKiGwnfkKNlY2VQfVphzSCVDl4UNzDpAUdvDpVEtqWOETiuwUSSjlWHVE1ScrPyoThminBPB9xQljG0bUBkVO8aj8qoqAd6uo/wBIrgnkmlY6GbZnW6hOoZp5yzU04lJUBB3jxrMZc0KBpty4W4UlfMVJ7WQmp7cL+jkrV6z3xQTb+sUCffTdikFwBYwTTvaSbNt5wMalAoAEjINH6naJfUalqYa2gmYM4qyWhJlUb/KuvaZMNq58qitPEdBAMwYq5e2yKbCW9aVDBFNpU4SJe+MdKTWUFPCkg6vlRtbWue5JT5CsLIKl5wnvC5xAgAY6Gr2y3got94QlStSsAnl+w+FDWttSQUsKAxnSK60ptzCUKORsgVhGuBwsPS0txZQAEYAGASRUFo3wcZBMSDECSBXW0hCVK7hyIElTYwKC/buKhSGVgH+nHhQQiffI0xYNuaQp8IkiSSMcUda7c9ntNKdCH0ygEwY6THxwaTtAAtaVsKWRAgDbNOsOsNsPJXarktKhUDhO0+GSM/vWdpgakn5C2JdNqUtXIA7tfCQNt+dEhaX1MqugEp1GYGfZ/j4VXsntSxtGgm4te8WAoHA5xAoFxfWT18t1NvpQQYTA8P5pa9z4S1k5Na8+40Qt1JUq8GT0T0oSnFtsnRdJIKvZhOTpH0A+FZy3mCrDcYOwHT96IlbJIWGFKTMTpxOkfX9aah1jHr19wWakC67xJKQUQPH9p99URcPFtoC5gJSgpSAmcZA+IpF1TfckBohcJyYGwAPzBPvrjKmgj1jJVlBJAGw3HvoKNDLGkixkEAPpIEQceO1UddXpjvtUeXWghSQniRJETtXFOtEABGYztTIrqWK1wPWfp98qGoqIOpU77iuJcbknQflULrXHKNxj6Vh0iqCUtiFdfpXJKlGVddxVApIHEJxUKkk4TWYxdKNRJ1DY/pXXGsDiH2K6yUhQ1JMVrWbdrcJDaobUfxr2qOSevSWSenTFda0xxCllTO5rT7QDSFlKcjqOdZiimdqMZWi+KVo4lVEKydI1YFLg1bHjRKNDrbxSRB59KuXSpxRK/IkUiPfV0kA5k0UkScF5GZUSTrFc1KKNJz7qCFJ6VcqTHCI86YFFzEn9quDA/ihqWnRABmrJU3+JPyogaNbsyyXeqS2FhKSJ9kHYEx8qG0whpTnrfWpeCRwzPtZ++tIIfKDDYiutqRu4gklSSMTjP8UtOyWkrfeHpLRhdxblTj7aR3aMaeWefxpO+uHGvVApKUCBCRnEfpjypRi7YQEhLRxAVw/zVVvoWpJU0oyQcjlOaRRakc8cUt7fgE0+6FrUFAKUZ28aabS4tD0vJGlChGncbxvj2RSduW0uLDjciRAjbNVe0KWENJg7QOfSqvp062xhy0CEAhyeIj2envoQZCnSjVEc6CtK0HStJEHpRTETpIPMxRSo1NBW7QKVBdA328p+tcYC1NlKVgDV03x/FU1IkhIk7+zVkrZQQXEkjoEfzWB0puSNUyeYFGZZW4ABtI/CKWccaI9WkgwNxzjPzrU7MvbFnSbhgrgpnA2ETz86Vt0CbklaRmPoLYiMnfAoKU8Te2fGj3jgcXKcUAKQkpJG2/jRTKRuiy0FJgEfD3fWqFE7kR5V1xbZUClOOeKoVInbFYdWcUkJGDNUq6lonANCM0BkGSr7iiJfKJg0mZ8amo0klZtLDPr1ZKppUnNWUomhE0EqKRjSIKsKlSiFl0qJq1SpRFZ0VapUphWWqCpUogLpMKBqwcUmCOgqVKIrLIcI2jiMmrB9eBjhGMVKlYRlFqKlFROSSTXUEpKVg8QMg+WalSsEs66p1WpUSDy+/Cq94egqVKJjoXxnA2qi1ExJ5VKlAxWoSZqVKwTknWBXF712pQGKHeoalSswooa7yqVKUJQqIFUJqVKA6K1w1KlAZH//2Q==)">
-<h1 class="neon-text" style="font-size:40px;font-family:Courier New;text-align:center">
+<h1 class="neon-text" style="font-size:40px;font-family:Courier New;text-align:center;font-weight:550">
 notJonny's Awesome HTML Site</h1>
 
 
@@ -902,7 +974,7 @@ notJonny's Awesome HTML Site</h1>
 
 
 <h2
-style="Color: White;font-family:Courier New;font-size:25px;text-align:center">
+style="Color: White;font-family:Courier New;font-size:25px;text-align:center;font-weight:550">
 
 
 Not sure what to explore on this website? Here are some ideas!
@@ -928,11 +1000,11 @@ Not sure what to explore on this website? Here are some ideas!
   </div>
   <a href="https://docs.google.com/document/d/1oWycSjjtCSOlB0_-A8_8fTs5N6a6dH8CexyUJWZkL1Q/edit?tab=t.0">
 
-<button class="btn" style="font-size:23px;width:300px;margin-left:15px;height:50px"><span>My Awesome Stories</span>   </button></a><a href="https://sites.google.com/students.wcpss.net/the-deviant-studio"><button class="btn" style="margin-left:15px;font-size:23px;width:300px;height:50px"><span>Our Google Site!</span></button></a><a href="    https://www.youtube.com/@thegenius334"><button class="btn" style="font-size:23px;position: relative; top: -57px; margin-left:650px;height:50px">My Friend's YouTube Channel!</button>
+<button class="btn" style="font-size:23px;width:300px;margin-left:15px;height:50px;background-image: url('')"><span style="color:#FF007F">My Awesome Stories</span>   </button></a><a href="https://sites.google.com/students.wcpss.net/the-deviant-studio"><button class="btn" style="margin-left:17px;font-size:23px;width:300px;height:50px;color:#FF007F"><span>Our Google Site!</span></button></a><a href="    https://www.youtube.com/@thegenius334"><button class="btn" style="font-size:21px;position: relative; top: -57px; margin-left:655px;height:50px;color:#FF007F">My Friend's YouTube Channel!</button>
 </a> 
 
-</pre>
-</p>
+
+
 
 
 </div>
@@ -944,9 +1016,9 @@ background-attachment:fixed">
 </div>
  
   
-  <h2> <pre style="color:#0096FF">Chapter One: The Start of my Writing Addiction </pre>
+  <h2 style="color:#0096FF;font-family:Garamound">Chapter One: The Start of my Writing Addiction 
   </h2>
-  <p style=" color:white; font-size:15px; font-family:Courier;"> I started writing stories online in 4th Grade. Before, I only used the computer for gaming or occasionally writing essays for school. I had wrote a few short stories on paper, but without the help of a computer, my stories didn't go very far. This all changed, however, when I went to a writing camp over the summer after 3rd Grade with my friend Vincent. There, I was introduced to typing stories on a computer. There, </p>
+  <p style=" color:white; font-size:15px; font-family:Courier;"><br> I started writing stories online in 4th Grade. Before, I only used the computer for gaming or occasionally writing essays for school. I had wrote a few short stories on paper, but without the help of a computer, my stories didn't go very far. This all changed, however, when I went to a writing camp over the summer after 3rd Grade with my friend Vincent. There, I was introduced to typing stories on a computer. There, </p>
 </div>
 
 <div id="Paris" class="tabcontent" style="background-image:url(https://media.istockphoto.com/id/865457032/vector/abstract-futuristic-cyberspace-with-binary-code-matrix-background-with-digits-well-organized.jpg?s=612x612&w=0&k=20&c=IQcdedY8fn_DMq6nwc5MaHUBe0H0d5DPyibHR8J2usk=)">
@@ -986,10 +1058,10 @@ HIII
 <div class="matrix-container">
     <div class="matrix-text" data-text="How to Join">How to Join</div><div class="rain"></div>
 </div><h1 class="neon-green-text" style="text-align:center;font-size:27px;font-weight:normal;font-family:Courier New;position: relative; top: -90px;">To Join, Contact the Founders or Fill out this Google Form!</h1>
-    <h1 class="glitch-text" data-text="Want Cool CSS Effects Like These?">Want Cool CSS Effects Like These?</div>
-  </div>
+    <h1 class="glitch-text" data-text="Want Cool CSS Effects Like These?">Want Cool CSS Effects Like These?
+<div class="container">
+    <h1 class="awesome-buzz-effect">Awesome Buzz Effect</h1>
 </div>
-
 </body>
 
 <script>
