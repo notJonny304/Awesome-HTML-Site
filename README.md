@@ -18,18 +18,24 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Geologica"> 
       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora">
  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Crimson Text"><style>
-:root {
-  --color: var(--yellow-5);
-  --shadow: var(--yellow-8);
-  --glare: hsl(0 0% 100% / 0.75);
-  --font-size: var(--font-size-fluid-3);
-  --transition: 0.2s;
+
+  :root {
+    --primary-color: #212121;
+    --background-color: #111;
+    --font: sans-serif;
+    --info-bg: #333; 
 }
 
 * {
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-body {font-family: Georgia, ARial}
+body {
+    background: var(--background-color);
+   
+  
+}
 
 /* Style the tab */
 .tab {
@@ -1062,6 +1068,164 @@ section:first-child {
   background-color: black;
   margin: 6px 0;
 }
+   .outer {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+/* Timeline Container */
+.timeline {
+    background: var(--primary-color);
+    width: 100%;
+    padding: 20px;
+}
+/* Card container */
+.card {
+    position: relative;
+    width: 100%;
+}
+/* setting padding based on even or odd */
+.card:nth-child(odd) {
+    padding: 30px 0 30px 30px;
+}
+.card:nth-child(even) {
+    padding: 30px 30px 30px 0;
+}
+/* Global ::before (The main line connecting dots) */
+.card::before {
+    content: '';
+    position: absolute;
+    width: 50%;
+    border: solid orangered;
+}
+/* Setting the border of top, bottom, left */
+.card:nth-child(odd)::before {
+    left: 0px;
+    top: -4.5px;
+    bottom: -4.5px;
+    border-width: 5px 0 5px 5px;
+    border-radius: 50px 0 0 50px;
+}
+@media only screen and (max-width: 800px) {
+    .card:nth-child(odd)::before {
+        top: -5px;
+        bottom: -5px;
+    }
+}
+/* Setting the border of top, bottom, right */
+.card:nth-child(even)::before {
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-width: 5px 5px 5px 0;
+    border-radius: 0 50px 50px 0;
+}
+/* Removing the border if it is the first card */
+.card:first-child::before {
+    border-top: 0;
+    border-top-left-radius: 0;
+}
+/* Removing the border if it is the last card and it s odd */
+.card:last-child:nth-child(odd)::before {
+    border-bottom: 0;
+    border-bottom-left-radius: 0;
+}
+/* Removing the border if it is the last card and it s even */
+.card:last-child:nth-child(even)::before {
+    border-bottom: 0;
+    border-bottom-right-radius: 0;
+}
+/* Information about the timeline */
+.info {
+    display: flex;
+    flex-direction: column;
+    background: var(--info-bg);
+    color: gray;
+    border-radius: 10px;
+    padding: 10px;
+    max-width: 500px;
+    position: relative; /* Needed for positioning the triangle pseudo-element */
+}
+
+/* --- ADDED CODE FOR TRIANGLES --- */
+
+/* Global triangle pseudo-element on the info box */
+.info::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+/* Triangle for ODD cards (points left towards the dot) */
+.card:nth-child(odd) .info::after {
+    /* Creates a left-pointing triangle using CSS borders */
+    border-width: 10px 15px 10px 0;
+    border-color: transparent var(--info-bg) transparent transparent;
+    left: -15px; /* Aligns the tip right against the edge of the info box */
+    top: 20px;
+}
+
+/* Triangle for EVEN cards (points right towards the dot) */
+.card:nth-child(even) .info::after {
+    /* Creates a right-pointing triangle using CSS borders */
+    border-width: 10px 0 10px 15px;
+    border-color: transparent transparent transparent var(--info-bg);
+    right: -15px; /* Aligns the tip right against the edge of the info box */
+    top: 20px;
+}
+
+/* --- END ADDED CODE --- */
+
+/* Title of the card */
+.title {
+    color: orangered;
+    position: relative;
+}
+/* Timeline dot */
+.title::before {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: white;
+    border-radius: 999px;
+    border: 3px solid orangered;
+    font-size: 40px
+}
+/* text right if the card is even */
+.card:nth-child(even) > .info > .title {
+    text-align: right;
+}
+/* setting dot to the left if the card is odd */
+.card:nth-child(odd) > .info > .title::before {
+    left: -45px;
+}
+/* setting dot to the right if the card is odd */
+.card:nth-child(even) > .info > .title::before {
+    right: -45px;
+}
+special-card {
+    width: 900px; 
+    
+    max-width: 90vw; 
+    padding: 30px 0 30px 30px; 
+}
+
+/* Adjusting the dot position for the special card if needed */
+.special-card > .info > .title::before {
+    left: -45px; /* Keep it consistent */
+}
+
+
+.special-card:nth-child(odd) {
+    padding: 30px 0 30px 30px;
+}
+/* If it's an even card but you want odd padding */
+ .special-card:nth-child(even) {
+    padding: 30px 0 30px 30px;
+} 
 </style>
 </head>
 <body>
@@ -1126,13 +1290,62 @@ background-attachment:fixed">
   
   <h2 style="color:#0096FF;font-family:Crimson Text;font-size:30px;font-weight:950px ">Chapter One: The Start of My Writing Addiction 
   </h2>
-  <p style=" color:white; font-size:19px; font-family:Spectral;position:relative; top:-15px"><br> I started writing stories online in 4th Grade. Before, I only used the computer for gaming or occasionally writing essays for school. I had wrote a few short stories on paper, but without the help of a computer, my stories didn't go very far. This all changed, however, when I went to a writing camp over the summer after 3rd Grade with my friend Vincent. There, I was introduced to typing stories on a computer. I remember coming up with a character named Wyatt Plague. It was about a nerdy kid who's dad kept on making him excersize. He was invited to join a battalion that belonged to a differenmt multiverese, provided he complete a quest. He meets Willow, a knowledgeble girl who knows about the different dimensions and helps his quest. I'm not going to spoil more than that, but   </p>
+  <p style=" color:white; font-size:19px; font-family:Spectral;position:relative; top:-15px"><br> I started writing stories online in 4th Grade. Before, I only used the computer for gaming or occasionally writing essays for school. I had wrote a few short stories on paper, but without the help of a computer, my stories didn't go very far. This all changed, however, when I went to a writing camp over the summer after 3rd Grade with my friend Vincent. There, I was introduced to typing stories on a computer. <br><br>I remember coming up with a character named Wyatt Plague. It was about a nerdy kid who's dad kept on making him excersize. He was invited to join a battalion that belonged to a differenmt multiverese, provided he complete a quest. He meets Willow, a knowledgeble girl who knows about the different dimensions and helps his quest. I'm not going to spoil more than that, but it was still a good start. I continued the story until summer ended. But with school started and my schedule overflowing with classes sports, and schoolwork, I lost my enthusiasm for writing stories. Luckily, two of my friends came to save the day. 
+  <br>
+  <h2 style="color:#0096FF;font-family:Crimson Text;font-size:30px;font-weight:950px ">Chapter Two: Deviant Universe Origins
+  </h2>
+  In the second quarter of 4th Grade,  </p>
 </div>
 <div id="Profiles" class="tabcontent">
   
-  <h3>Tokyo</h3>
+  <h3 style="font-damilyuj9">The Deviant Members </h3>
   <p>Tokyo is the capital of Japan.</p>
+
+ 
+    <div class="timeline" style="width:100%">
+        <!-- Removed all inline styles from your original HTML structure -->
+        <div class="card" >
+            <div class="info" >
+                <h3 class="title" style="position:relative; top:11px;"><span style="position:relative; top:-9px;font-family:Crimson Text">HFSNBW is Founded</span></h3>
+                <p style="font-family:Spectral;position:relative;top:-11px">In 4th Grade Sean and Hao founded the AA Honors to annoy people that they didn't like. At first, it was only them two messing, but soon they started recuriting more and more members from Mr. Simonds class. They also change their name to "HFSNBW", which stood for "Heck Frick Sigma not bad words", to protest against the girls calling them out for saying heck, frick and, sigma. </p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="info" style="margin-left:450px">
+                <h3 class="title" style="position:relative; top:9px"><span style="position:relative; top:-9px;font-family:Crimson Text;margin-right:32px">Obtuse Honors is  Founded to Rival HFSNBW</span></h3>
+                <p style="font-family:spectral;position:relative;top:-15px; ">After HFSNBW was founded, an enemy club called Obtuse Honors was founded by Adam Luicano to try and overthrow HFSNBW. Both clubs started recruting more and more members, and they had regular "Blooket Wars," to see which one was better at Blooket. This was around the same time when notJonny(Me), one of the most Prominent members joined. But because I wasn't in the class the Blooket Wars took place in, I couldn't participate, and Obtuse Honors won the Blooket Wars by forfeit. (See "My Journey" for more Information on how I joined.) </p>
+            </div>
+        </div>
+        <div class="card" style="">
+            <div class="info" style="">
+ <h3 class="title" style="position:relative; top:11px"><span style="position:relative; top:-9px;font-family:Crimson Text">Deviant Minds is Founded</span></h3>
+                <p style="position:relative; top:-14px;font-family:Spectral;">notJonny founded Deviant Minds in 5th Grade to slowly take down HFSNBW and Obtuse Honors. In 5th Grade, both clubs were weakened as many club members left over the summer. And Deviant Minds was quickly gaining power. The three founders, notJonny, Quetz, and Vinsconte, started mass recrutuiting and making many new projects. And soon Deviant Minds began taking over HFSNBW and Obtuse Honors. Then, Sean, Haven, and Vincent, one of Deviant Minds' own founders, created a rebellion called Tree(4)ce. Deviant Minds' was in trouble, and so we allied with the remaining founder of HFSNBW, PG7, to take down Tree(4)ce. Finally, the major wars ended, and the clubs merged into Deviant Studios. </p>
+            </div>
+        </div>
+        <div class="card" style="border-width:750px">
+            <div class="info"style="margin-left:452px">
+                 <h3 class="title" style="position:relative; top:8px"><span style="position:relative; top:-9px; font-family:Crimson Text">The Shadow Arc</span></h3>
+                <p style="position:relative; top:-14px;font-family:Spectral;">After the War of Factions ended, HFSNBW was now known as Deviant Studios. (Sometimes still HFSNBW, it's confusing.) But, as the most mischievous club member of the Deviant Studio, I was getting bored. And theGenius9, the captain (soon to be former captain) of the Deviant Studio had made a group chat for us to share our ideas. And, as the troublemaker I was (and still am), I decided to make some chaos. So first off I changed my username on our group chat to "Shadow," and started trolling the other members. But it got crazier as I hired one of my friends, Wynn. He took the username shadow too, and we the people in the group chat had <span style="font-style:italic">no</span> idea I was behind this. I think they got a bit suspicious later on, but I cleared up the evidence. Until I made a mistake that leaked my entire identity. </p>
+            </div>
+        </div>
+        <div class="card" style="width:100%">
+            <div class="info"style="width:100%">
+               <h3 class="title" style="position:relative; top:11px; font-size:25px"><span style="position:relative; top:-9px;font-family:Crimson Text; transform: scaleX(1.9);font-size:28px">Title Five</span></h3>
+                  <p style="position:relative;top:-16px;font-family: spectral;font-size:15px;width:100%"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </div>
+          <div class="card" style="width:100%">
+            <div class="info"style="width:100%">
+               <h3 class="title" style="position:relative; top:11px; font-size:25px"><span style="position:relative; top:-9px;font-family:Crimson Text; transform: scaleX(1.9);font-size:28px">Title Five</span></h3>
+                  <p style="position:relative;top:-16px;font-family: spectral;font-size:15px;width:100%"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </div>
+        
+        
+    </div>
+    
 </div>
+
 
 <div id="Paris" class="tabcontent" style="background-image:url(https://media.istockphoto.com/id/865457032/vector/abstract-futuristic-cyberspace-with-binary-code-matrix-background-with-digits-well-organized.jpg?s=612x612&w=0&k=20&c=IQcdedY8fn_DMq6nwc5MaHUBe0H0d5DPyibHR8J2usk=)">
 <div class="notJonny">
@@ -1260,7 +1473,6 @@ function showSlides(n) {
    
 
 </html> 
-
 
 
 
